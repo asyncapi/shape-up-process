@@ -1,5 +1,4 @@
 on:
-  push:
   issues:
     types: [opened, deleted, closed, reopened, labeled, unlabeled]
 name: Publish on Netlify
