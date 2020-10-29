@@ -4,7 +4,7 @@ on:
     types: [opened, deleted, closed, reopened, labeled, unlabeled]
   issue_comment:
     types: [created, edited, deleted]
-name: Publish on Netlify
+name: Process changes and deploy
 
 jobs:
   publish:
@@ -12,6 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+        fetch-depth: 0 
 
     - name: Cancel previous builds
       uses: n1hility/cancel-previous-runs@v2
@@ -24,9 +27,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         repo_owner: asyncapi
         repo_name: shape-up-process
+    
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Update progress.json" -a
 
-    - name: Publish
-      uses: netlify/actions/build@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
