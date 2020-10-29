@@ -37,7 +37,7 @@ async function start () {
       }
     )
 
-    const result = scopesWithComments.data.repository.issues.edges.map(sc => {
+    const result = scopesWithComments.repository.issues.edges.map(sc => {
       return {
         issue_number: sc.node.number,
         percentage: getCurrentPercentage(sc.node.comments.edges.map(edge => edge.node.bodyText)),
