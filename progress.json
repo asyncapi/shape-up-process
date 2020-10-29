@@ -11,8 +11,12 @@
   },
   {
     "issue_number": 19,
-    "percentage": 34,
+    "percentage": 89,
     "history": [
+      {
+        "percentage": 89,
+        "status": " works?"
+      },
       {
         "percentage": 34,
         "status": "4"
