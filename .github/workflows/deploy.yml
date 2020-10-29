@@ -29,11 +29,10 @@ jobs:
         repo_name: shape-up-process
     
     - name: Commit files
-      continue-on-error: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "Update progress.json" -a
+        git commit -m "Update progress.json" -a --allow-empty
 
     - name: Push changes
       uses: ad-m/github-push-action@master
