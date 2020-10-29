@@ -3,8 +3,10 @@ import { useState } from 'react'
 import Bet from '../components/Bet'
 import Scope from '../components/Scope'
 import data from '../data.json'
+import progress from '../progress.json'
 
-export default function Home({ bets, scopes }) {
+export default function Home({ bets, scopes, progress }) {
+  console.log(progress)
   const [visibleBet, setVisibleBet] = useState(bets[0])
 
   function onBetChange({ issue, toggled }) {
@@ -80,7 +82,10 @@ export default function Home({ bets, scopes }) {
 export async function getStaticProps(context) {
   return {
     props: {
-      ...data
+      ...data,
+      ...{
+        progress,
+      },
     },
   }
 }
