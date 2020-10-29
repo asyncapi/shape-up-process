@@ -1,4 +1,5 @@
 on:
+  push:
   issues:
     types: [opened, deleted, closed, reopened, labeled, unlabeled]
   issue_comment:
