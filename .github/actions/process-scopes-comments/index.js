@@ -7,7 +7,7 @@ start()
 async function start () {
   try {
     core.setCommandEcho(true)
-    const response = await octokit.graphql(
+    const scopesWithComments = await octokit.graphql(
       `
       query scopesWithComments($owner: String!, $repo: String!) {
         repository(owner: $owner, name: $repo) {
@@ -36,10 +36,6 @@ async function start () {
         repo: core.getInput('repo_name'),
       }
     )
-    
-    console.log(response)
-    const { scopesWithComments } = response
-    console.log(scopesWithComments)
 
     const result = scopesWithComments.data.repository.issues.edges.map(sc => {
       return {
