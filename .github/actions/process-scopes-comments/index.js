@@ -37,6 +37,8 @@ async function start () {
       }
     )
 
+    console.log(require('util').inspect(scopesWithComments, {depth: null}))
+
     const result = scopesWithComments.repository.issues.edges.map(sc => {
       return {
         issue_number: sc.node.number,
