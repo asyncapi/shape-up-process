@@ -1,0 +1,5 @@
+name: 'Process scopes comments'
+description: 'Processes comments on scope issues.'
+runs:
+  using: 'node12'
+  main: 'index.js'

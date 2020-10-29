@@ -3,15 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/build-data.js && next dev",
+    "build": "node scripts/build-data.js && next build",
     "start": "next start",
     "export": "next export"
   },
   "dependencies": {
+    "@tailwindcss/ui": "^0.6.2",
+    "dotenv": "^8.2.0",
+    "nearest-color": "^0.4.4",
     "next": "10.0.0",
+    "node-fetch": "^2.6.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "string-to-color": "^2.2.2"
   },
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",

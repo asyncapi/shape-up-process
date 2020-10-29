@@ -4,8 +4,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-  },
-  variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/ui'),
+  ]
 }

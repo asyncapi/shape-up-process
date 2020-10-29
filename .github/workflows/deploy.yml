@@ -1,6 +1,8 @@
 on:
   issues:
     types: [opened, deleted, closed, reopened, labeled, unlabeled]
+  issue_comment:
+    types: [created, edited, deleted]
 name: Publish on Netlify
 
 jobs:
@@ -14,6 +16,13 @@ jobs:
       uses: n1hility/cancel-previous-runs@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Process scope issue comments
+      uses: ./.github/actions/process-scopes-comments
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        repo_owner: asyncapi
+        repo_name: shape-up-process
 
     - name: Publish
       uses: netlify/actions/build@master
