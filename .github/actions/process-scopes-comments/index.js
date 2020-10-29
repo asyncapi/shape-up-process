@@ -1,3 +1,5 @@
+const { writeFileSync } = require('fs')
+const { resolve } = require('path')
 const core = require('@actions/core')
 const { Octokit } = require('@octokit/action')
 const octokit = new Octokit()
@@ -37,8 +39,6 @@ async function start () {
       }
     )
 
-    console.log(require('util').inspect(scopesWithComments, {depth: null}))
-
     const result = scopesWithComments.repository.issues.edges.map(sc => {
       return {
         issue_number: sc.node.number,
@@ -47,7 +47,7 @@ async function start () {
       }
     })
 
-    console.log(result)
+    writeFileSync(resolve(__dirname, '../../..', 'progress.json'), JSON.stringify(result, null, '  '))
   } catch (error) {
     core.setFailed(error.message)
   }
