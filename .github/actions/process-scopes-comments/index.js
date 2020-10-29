@@ -60,6 +60,7 @@ function getCurrentPercentage(comments) {
   
   do {
     percentage = getPercentage(reversedComments[i])
+    i++
   } while(percentage === null && i < reversedComments.length)
 
   return percentage === null ? 0 : percentage
@@ -72,6 +73,7 @@ function getPercentage(comment = '') {
     if (Number.isNaN(result)) return null
     if (result < 0) return 0
     if (result > 100) return 100
+    return result
   }
   return null
 }
