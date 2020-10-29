@@ -63,7 +63,7 @@ function getCurrentPercentage(comments) {
   return percentage === null ? 0 : percentage
 }
 
-function getPercentage(comment) {
+function getPercentage(comment = '') {
   const matches = comment.match(/^\/progress[\s]+([\d]+)/)
   if (matches && matches.length === 2) {
     let result = Number(matches[1])
@@ -74,7 +74,7 @@ function getPercentage(comment) {
   return null
 }
 
-function getStatus(comment) {
+function getStatus(comment = '') {
   const matches = comment.match(/^\/progress[\s]+[\d\n]+(.+)/s)
   if (matches && matches.length === 2) return matches[1]
   return null
