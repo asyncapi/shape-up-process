@@ -11,8 +11,12 @@
   },
   {
     "issue_number": 19,
-    "percentage": 65,
+    "percentage": 34,
     "history": [
+      {
+        "percentage": 34,
+        "status": "4"
+      },
       {
         "percentage": 65,
         "status": "A title\n\nA quote here...\n\nAnd this is bold."
