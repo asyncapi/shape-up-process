@@ -29,6 +29,7 @@ jobs:
         repo_name: shape-up-process
     
     - name: Commit files
+      continue-on-error: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -36,6 +37,7 @@ jobs:
 
     - name: Push changes
       uses: ad-m/github-push-action@master
+      continue-on-error: true
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: master

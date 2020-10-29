@@ -1,18 +1,37 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import stringToColor from 'string-to-color'
+import nearestColor from 'nearest-color'
 import Bet from '../components/Bet'
+import HillChart from '../components/HillChart'
 import Scope from '../components/Scope'
+import colors from '../components/colors'
 import data from '../data.json'
 import progress from '../progress.json'
 
-export default function Home({ bets, scopes, progress }) {
-  console.log(progress)
+export default function Home({ bets, scopes }) {
   const [visibleBet, setVisibleBet] = useState(bets[0])
+  const [visibleScopes, setVisibleScopes] = useState(scopes.filter(scope => belongsToBet(bets[0], scope)))
+  const [selectedScopes, setSelectedScopes] = useState(scopes.filter(scope => belongsToBet(bets[0], scope)))
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
       setVisibleBet(issue)
+      const allScopesFromBet = scopes.filter(scope => belongsToBet(issue, scope))
+      setVisibleScopes(allScopesFromBet)
+      setSelectedScopes(allScopesFromBet)
     }
+  }
+  
+  function onScopeChange({ issue, toggled }) {
+    setSelectedScopes(visibleScopes.filter(scope => {
+      return issue.number !== scope.number || toggled ? scope : false
+    }))
+  }
+
+  function belongsToBet(bet, scope) {
+    if (!scope || !scope.parent_epics || scope.parent_epics.length === 0) return false
+    return !!scope.parent_epics.find(pe => pe.issue_number === bet.number && pe.repo_id === bet.repo_id)
   }
   
   return (
@@ -62,14 +81,19 @@ export default function Home({ bets, scopes, progress }) {
 
               <div>
                 {
-                  scopes.map((scope, index) => (
-                    <Scope key={index} issue={scope} className="mt-3" />
+                  visibleScopes.map((scope, index) => (
+                    <Scope key={index} toggled={!!selectedScopes.find(s => s.number === scope.number)} issue={scope} onChange={onScopeChange} className="mt-3" />
                   ))
+                }
+                {
+                  !visibleScopes.length && (
+                    <p className="italic text-sm text-gray-400 mt-4">No scopes have been created yet.</p>
+                  )
                 }
               </div>
             </div>
-            <div className="lg:col-span-3 border border-gray-500">
-
+            <div className="lg:col-span-3">
+              <HillChart scopes={selectedScopes} />
             </div>
           </div>
         
@@ -80,12 +104,16 @@ export default function Home({ bets, scopes, progress }) {
 }
 
 export async function getStaticProps(context) {
+  data.scopes = data.scopes.map(scope => {
+    const scopeProgress = progress.find(p => p.issue_number === scope.number)
+    scope.progress = scopeProgress || null
+    scope.color = nearestColor.from(colors)(stringToColor(scope.title))
+    return scope
+  })
+
   return {
     props: {
       ...data,
-      ...{
-        progress,
-      },
     },
   }
 }
