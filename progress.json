@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "issue_number": 16,
+    "percentage": 0,
+    "history": []
+  },
+  {
+    "issue_number": 17,
+    "percentage": 0,
+    "history": []
+  },
+  {
+    "issue_number": 19,
+    "percentage": 65,
+    "history": [
+      {
+        "percentage": 65,
+        "status": "A title\n\nA quote here...\n\nAnd this is bold."
+      },
+      {
+        "percentage": null,
+        "status": null
+      },
+      {
+        "percentage": 64,
+        "status": "Comment here..."
+      }
+    ]
+  }
+]
