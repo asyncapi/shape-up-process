@@ -52,7 +52,7 @@ async function start () {
       return {
         issue_number: sc.node.number,
         percentage: getCurrentPercentage(sc.node.comments.edges.map(edge => edge.node.bodyText)),
-        history: sc.node.comments.edges.reverse().map(edge => getHistoryPoint(edge.node)),
+        history: sc.node.comments.edges.reverse().map(edge => getHistoryPoint(edge.node)).filter(Boolean),
       }
     })
 
