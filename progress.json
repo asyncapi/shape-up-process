@@ -15,23 +15,48 @@
     "history": [
       {
         "percentage": 89,
-        "status": " works?"
+        "status": " works?",
+        "createdAt": "2020-10-29T14:36:31Z",
+        "updatedAt": "2020-10-29T14:36:31Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        }
       },
       {
         "percentage": 34,
-        "status": "4"
+        "status": "4",
+        "createdAt": "2020-10-29T14:29:05Z",
+        "updatedAt": "2020-10-29T14:29:05Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        }
       },
       {
         "percentage": 65,
-        "status": "A title\n\nA quote here...\n\nAnd this is bold."
+        "status": "A title\n\nA quote here...\n\nAnd this is bold.",
+        "createdAt": "2020-10-29T08:03:28Z",
+        "updatedAt": "2020-10-29T08:30:37Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        }
       },
-      {
-        "percentage": null,
-        "status": null
-      },
+      null,
       {
         "percentage": 64,
-        "status": "Comment here..."
+        "status": "Comment here...",
+        "createdAt": "2020-10-29T07:14:00Z",
+        "updatedAt": "2020-10-29T08:03:36Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        }
       }
     ]
   }
