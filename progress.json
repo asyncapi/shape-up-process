@@ -22,7 +22,8 @@
           "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
           "name": "Fran Méndez",
           "url": "https://github.com/fmvilas"
-        }
+        },
+        "markdownText": "/progress 89 works?"
       },
       {
         "percentage": 34,
@@ -33,7 +34,8 @@
           "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
           "name": "Fran Méndez",
           "url": "https://github.com/fmvilas"
-        }
+        },
+        "markdownText": "/progress 34"
       },
       {
         "percentage": 65,
@@ -44,7 +46,8 @@
           "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
           "name": "Fran Méndez",
           "url": "https://github.com/fmvilas"
-        }
+        },
+        "markdownText": "/progress 65\r\n\r\n# A title\r\n\r\n> A quote here...\r\n\r\nAnd **this is bold**."
       },
       {
         "percentage": 64,
@@ -55,7 +58,8 @@
           "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
           "name": "Fran Méndez",
           "url": "https://github.com/fmvilas"
-        }
+        },
+        "markdownText": "/progress 64\r\n\r\nComment here..."
       }
     ]
   }
