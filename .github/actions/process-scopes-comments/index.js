@@ -25,6 +25,7 @@ async function start () {
                     node {
                       body
                       bodyText
+                      url
                       createdAt
                       updatedAt
                       author {
@@ -104,5 +105,6 @@ function getHistoryPoint(commentObject) {
     createdAt: commentObject.createdAt,
     updatedAt: commentObject.updatedAt,
     author: commentObject.author,
+    url: commentObject.url,
   }
 }
