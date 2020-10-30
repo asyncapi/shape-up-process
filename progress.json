@@ -27,8 +27,8 @@
       },
       {
         "percentage": 34,
-        "status": "4",
-        "statusMarkdown": "4",
+        "status": "",
+        "statusMarkdown": "",
         "createdAt": "2020-10-29T14:29:05Z",
         "updatedAt": "2020-10-29T14:29:05Z",
         "author": {
