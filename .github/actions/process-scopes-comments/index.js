@@ -23,6 +23,7 @@ async function start () {
                 comments(last: 100) {
                   edges {
                     node {
+                      body
                       bodyText
                       createdAt
                       updatedAt
