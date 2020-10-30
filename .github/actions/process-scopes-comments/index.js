@@ -100,9 +100,9 @@ function getHistoryPoint(commentObject) {
   return {
     percentage: getPercentage(commentObject.bodyText),
     status: getStatus(commentObject.bodyText),
+    statusMarkdown: getStatus(commentObject.body),
     createdAt: commentObject.createdAt,
     updatedAt: commentObject.updatedAt,
     author: commentObject.author,
-    markdownText: commentObject.body,
   }
 }
