@@ -89,7 +89,7 @@ function getPercentage(comment = '') {
 }
 
 function getStatus(comment = '') {
-  const matches = comment.match(/^\/progress[\s]+[\d\n]+(.+)/s)
+  const matches = comment.match(/^\/progress[\s]+[\d\n]+(.*)/s)
   if (matches && matches.length === 2) return matches[1]
   return null
 }
