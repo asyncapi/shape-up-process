@@ -52,7 +52,7 @@ async function start () {
       return {
         issue_number: sc.node.number,
         percentage: getCurrentPercentage(sc.node.comments.edges.map(edge => edge.node.bodyText)),
-        history: sc.node.comments.edges.reverse().map(edge => getHistoryPoint(edge.node.bodyText)),
+        history: sc.node.comments.edges.reverse().map(edge => getHistoryPoint(edge.node)),
       }
     })
 
@@ -93,9 +93,14 @@ function getStatus(comment = '') {
   return null
 }
 
-function getHistoryPoint(comment) {
+function getHistoryPoint(commentObject) {
+  if (!commentObject.bodyText.match(/^\/progress[\s]+/)) return
+
   return {
-    percentage: getPercentage(comment),
-    status: getStatus(comment),
+    percentage: getPercentage(commentObject.bodyText),
+    status: getStatus(commentObject.bodyText),
+    createdAt: commentObject.createdAt,
+    updatedAt: commentObject.updatedAt,
+    author: commentObject.author,
   }
 }
