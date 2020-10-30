@@ -24,6 +24,15 @@ async function start () {
                   edges {
                     node {
                       bodyText
+                      createdAt
+                      updatedAt
+                      author {
+                        avatarUrl(size: 100)
+                        ... on User {
+                          name
+                          url
+                        }
+                      }
                     }
                   }
                 }
