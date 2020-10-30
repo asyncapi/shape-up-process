@@ -103,5 +103,6 @@ function getHistoryPoint(commentObject) {
     createdAt: commentObject.createdAt,
     updatedAt: commentObject.updatedAt,
     author: commentObject.author,
+    markdownText: commentObject.body,
   }
 }
