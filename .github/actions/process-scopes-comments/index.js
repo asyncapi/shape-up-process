@@ -42,6 +42,7 @@ async function start () {
                     ... on ClosedEvent {
                       url
                       actor {
+                        avatarUrl(size: 100)
                         ... on User {
                           name
                           url
