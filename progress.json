@@ -2,16 +2,42 @@
   {
     "issue_number": 16,
     "percentage": 0,
-    "history": []
+    "history": [
+      {
+        "percentage": 100,
+        "status": null,
+        "statusMarkdown": null,
+        "createdAt": "2020-09-30T10:07:46Z",
+        "updatedAt": "2020-09-30T10:07:46Z",
+        "author": {
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/16#event-3823722326"
+      }
+    ]
   },
   {
     "issue_number": 17,
     "percentage": 0,
-    "history": []
+    "history": [
+      {
+        "percentage": 100,
+        "status": null,
+        "statusMarkdown": null,
+        "createdAt": "2020-09-30T10:07:38Z",
+        "updatedAt": "2020-09-30T10:07:38Z",
+        "author": {
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/17#event-3823721871"
+      }
+    ]
   },
   {
     "issue_number": 19,
-    "percentage": 15,
+    "percentage": 100,
     "history": [
       {
         "percentage": 15,
