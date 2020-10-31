@@ -7,7 +7,17 @@ require('dotenv').config({
 
 async function start () {
   try {
-    const res = await fetch('https://api.zenhub.com/v5/workspaces/5f6492205269c584ae1b576f/issues?epics=1&estimates=1&pipelines=0&repo_ids=296590488', {
+    let res = await fetch('https://api.zenhub.com/v4/workspaces/296590488/open-milestones?workspaceId=5f6492205269c584ae1b576f', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Authentication-Token': process.env.ZENHUB_TOKEN,
+      },
+    })
+    let cycles = await res.json()
+    cycles = Object.values(cycles).flat()
+    
+    res = await fetch('https://api.zenhub.com/v5/workspaces/5f6492205269c584ae1b576f/issues?epics=1&estimates=1&pipelines=0&repo_ids=296590488', {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -19,6 +29,7 @@ async function start () {
     const scopes = issues.filter(iss => iss.labels.length && iss.labels.find(label => label.name === 'Scope'))
 
     const result = {
+      cycles,
       bets,
       scopes,
     }

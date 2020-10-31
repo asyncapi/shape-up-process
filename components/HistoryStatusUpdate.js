@@ -29,10 +29,10 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
   return (
     <div className={`${className}`}>
       <div className="flex">
-        <img class="inline-block h-10 w-10 rounded-md" src={statusUpdate.progress.author.avatarUrl} title={statusUpdate.progress.author.name} />
+        <img className="inline-block h-10 w-10 rounded-md" src={statusUpdate.progress.author.avatarUrl} title={statusUpdate.progress.author.name} />
         <div className="ml-2 -mt-1">
           <a href={statusUpdate.progress.author.url} target="_blank" className="text-sm text-gray-900 font-medium hover:text-gray-600 transition ease-in-out duration-150">{statusUpdate.progress.author.name}</a>
-          <p className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500">
             Updated progress of
             <a href={statusUpdate.progress.url} target="_blank" className="inline-flex mx-1.5 text-sm text-gray-900 font-medium hover:text-gray-600 transition ease-in-out duration-150">
               <div style={{ backgroundColor: statusUpdate.scope.color }} className="mr-1 rounded-full w-3 h-3"></div>
@@ -42,7 +42,7 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
             <span title={fullDateTime()}>
               {lastDate()}
             </span>
-          </p>
+          </div>
         </div>
       </div>
       <ReactMarkdown plugins={[GithubFlavoredMarkdown]} className="mt-4 mb-8 markdown-body">
