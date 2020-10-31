@@ -11,12 +11,15 @@
   "dependencies": {
     "@tailwindcss/ui": "^0.6.2",
     "dotenv": "^8.2.0",
+    "github-markdown-css": "^4.0.0",
     "linear-scale": "0.0.3",
     "nearest-color": "^0.4.4",
     "next": "10.0.0",
     "node-fetch": "^2.6.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-markdown": "^5.0.2",
+    "remark-gfm": "^1.0.0",
     "string-to-color": "^2.2.2"
   },
   "devDependencies": {

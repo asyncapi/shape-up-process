@@ -8,6 +8,8 @@ import Scope from '../components/Scope'
 import colors from '../components/colors'
 import data from '../data.json'
 import progress from '../progress.json'
+import ChartLegend from '../components/ChartLegend'
+import HistoryStatusUpdate from '../components/HistoryStatusUpdate'
 
 export default function Home({ bets, scopes }) {
   const [visibleBet, setVisibleBet] = useState(bets[0])
@@ -33,6 +35,17 @@ export default function Home({ bets, scopes }) {
     if (!scope || !scope.parent_epics || scope.parent_epics.length === 0) return false
     return !!scope.parent_epics.find(pe => pe.issue_number === bet.number && pe.repo_id === bet.repo_id)
   }
+
+  const history = selectedScopes.map(scope => {
+    return scope.progress.history.map(h => {
+      return {
+        progress: h,
+        scope,
+      }
+    })
+  }).flat().sort((h1, h2) => {
+    return new Date(h2.updatedAt) - new Date(h1.updatedAt)
+  })
   
   return (
     <>
@@ -53,47 +66,75 @@ export default function Home({ bets, scopes }) {
             </div>
           </div>
           
-          <div className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-4">
+          <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-4">
             <div>
-              <div className="pb-5 border-b border-gray-200 space-y-2">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Bets
-                </h3>
-                <p className="max-w-4xl text-sm leading-5 text-gray-500">Ideas we're now <strong>committed</strong> to implement during this 6 weeks cycle.</p>
-              </div>
+              <div className="lg:shadow lg:p-4">
+                <div className="pb-5 border-b border-gray-200 space-y-2">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Bets
+                  </h3>
+                  <p className="max-w-4xl text-sm leading-5 text-gray-500">Ideas we're now <strong>committed</strong> to implement during this 6 weeks cycle.</p>
+                </div>
 
-              <div>
-                {
-                  bets.map((bet, index) => (
-                    <Bet key={index} issue={bet} toggled={bet.issue_number === visibleBet.issue_number} className="mt-3" onChange={onBetChange} />
-                  ))
-                }
-              </div>
+                <div>
+                  {
+                    bets.map((bet, index) => (
+                      <Bet key={index} issue={bet} toggled={bet.issue_number === visibleBet.issue_number} className="mt-3" onChange={onBetChange} />
+                    ))
+                  }
+                </div>
 
-              <div className="mt-8 pb-5 border-b border-gray-200 space-y-2">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Scopes
-                </h3>
-                <p className="max-w-4xl text-sm leading-5 text-gray-500">
-                  Scopes are groups of related tasks.
-                </p>
-              </div>
+                <div className="mt-8 pb-5 border-b border-gray-200 space-y-2">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Scopes
+                  </h3>
+                  <p className="max-w-4xl text-sm leading-5 text-gray-500">
+                    Scopes are groups of related tasks.
+                  </p>
+                </div>
 
-              <div>
-                {
-                  visibleScopes.map((scope, index) => (
-                    <Scope key={index} toggled={!!selectedScopes.find(s => s.number === scope.number)} issue={scope} onChange={onScopeChange} className="mt-3" />
-                  ))
-                }
-                {
-                  !visibleScopes.length && (
-                    <p className="italic text-sm text-gray-400 mt-4">No scopes have been created yet.</p>
-                  )
-                }
+                <div>
+                  {
+                    visibleScopes.map((scope, index) => (
+                      <Scope key={index} toggled={!!selectedScopes.find(s => s.number === scope.number)} issue={scope} onChange={onScopeChange} className="mt-3" />
+                    ))
+                  }
+                  {
+                    !visibleScopes.length && (
+                      <p className="italic text-sm text-gray-400 mt-4">No scopes have been created yet.</p>
+                    )
+                  }
+                </div>
               </div>
             </div>
             <div className="lg:col-span-3">
+              <h2 className="text-2xl leading-6 font-medium text-gray-900">
+                Current cycle
+              </h2>
+              <p className="my-4 text-gray-500">The current cycle spans from November 4, 2020 to December 18, 2020.</p>
               <HillChart scopes={selectedScopes} />
+              <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {
+                  selectedScopes.map((scope, index) => (
+                    <ChartLegend key={index} issue={scope} className="mt-3" />
+                  ))
+                }
+              </div>
+              <h3 className="mt-12 mb-8 text-xl leading-6 font-medium text-gray-900">
+                History
+              </h3>
+              <div>
+                {
+                  history.map((statusUpdate, index) => (
+                    <HistoryStatusUpdate key={index} statusUpdate={statusUpdate} className="mt-4" />
+                  ))
+                }
+                {
+                  !history.length && (
+                    <p className="italic text-sm text-gray-400 mt-4">No history yet.</p>
+                  )
+                }
+              </div>
             </div>
           </div>
         

@@ -23,22 +23,14 @@ export default function HillChart({ scopes = [] }) {
   
   return (
     <div>
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-full" viewBox="0 0 820 230">
-        <style>{`
-          .hill-dot__circle {
-            stroke: #fff;
-            stroke-width: 0;
-          }
-        `}</style>
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-full" viewBox="0 0 820 260">
         <g transform="translate(15, 15)">
-          <g className="hill-chart__x-axis" fill="none">
-            <path className="stroke-gray-200" strokeWidth="1.5" d="M0,205H790" />
-          </g>
-          <g className="hill-chart__y-axis" strokeDasharray="2 2" fill="none">
-            <path className="stroke-gray-200" strokeWidth="1.5" d="M395,0V195" />
-          </g>
-          <path className="stroke-gray-200" strokeWidth="1.5" fill="none" d={generateCurvePoints()} />
-          <g className="hill-dots">
+          <path className="stroke-gray-200" fill="none" strokeWidth="1.5" d="M0,205H790" />
+          <path className="stroke-gray-200" fill="none" strokeDasharray="2 2" strokeWidth="1.5" d="M395,0V195" />
+          <path className="stroke-gray-200" fill="none" strokeWidth="1.5"  d={generateCurvePoints()} />
+          <text x="23%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Figuring things out</text>
+          <text x="73%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Making it happen</text>
+          <g>
             {
               dots.map((dot, index) => (
                 <circle key={index} title={dot.text} fill={dot.color} className="stroke-white" r="10" cx={dot.x} cy={dot.y} />
@@ -47,10 +39,6 @@ export default function HillChart({ scopes = [] }) {
           </g>
         </g>
       </svg>
-      <div className="flex">
-        <span className="w-1/2 text-center text-gray-500 uppercase text-sm">Figuring things out</span>
-        <span className="w-1/2 text-center text-gray-500 uppercase text-sm">Making it happen</span>
-      </div>
     </div>
   )
 }

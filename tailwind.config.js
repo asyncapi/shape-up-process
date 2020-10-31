@@ -13,7 +13,8 @@ module.exports = {
       'gray-200': theme('colors.gray.200')
     }),
     fill: theme => ({
-      'gray-300': theme('colors.gray.300')
+      'gray-300': theme('colors.gray.300'),
+      'gray-500': theme('colors.gray.500')
     }),
   },
 }
