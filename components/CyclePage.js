@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
@@ -61,9 +62,9 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
         <div className="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="lg:flex lg:justify-between">
             <div className="max-w-xl">
-              <a href="/">
-                <h2 className="text-4xl leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">Shape Up 🏋️‍♀️</h2>
-              </a>
+              <Link href="/">
+                <a><h2 className="text-4xl leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">Shape Up 🏋️‍♀️</h2></a>
+              </Link>
               <p className="mt-5 text-xl leading-7 text-gray-500">This dashboard shows the progress we're making during this 6-weeks cycle.</p>
             </div>
             <div className="mt-10 w-full max-w-xs">
@@ -153,17 +154,21 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
                   {inCycle ? 'Current' : 'This'} cycle
                 </h2>
                 <div className="flex">
-                  <a href={previousCycle ? `/cycles/${previousCycle.id}` : null} title="Go to the previous cycle">
-                    <svg className={`w-6 h-6 ${!previousCycle && 'text-gray-300'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </a>
+                  <Link href={previousCycle ? `/cycles/${previousCycle.id}` : ''}>
+                    <a title="Go to the previous cycle">
+                      <svg className={`w-6 h-6 ${!previousCycle && 'text-gray-300'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </a>
+                  </Link>
 
-                  <a href={nextCycle ? `/cycles/${nextCycle.id}` : null} title="Go to the next cycle">
-                    <svg className={`w-6 h-6 ${!nextCycle && 'text-gray-300'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
+                  <Link href={nextCycle ? `/cycles/${nextCycle.id}` : ''}>
+                    <a title="Go to the next cycle">
+                      <svg className={`w-6 h-6 ${!nextCycle && 'text-gray-300'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <p className="my-4 text-gray-500">The {inCycle ? 'current' : 'this'} cycle {inCycle ? 'started' : 'starts'} on {new Date(visibleCycle.start_date).toDateString()} and will finish on {new Date(visibleCycle.due_on).toDateString()}.</p>
