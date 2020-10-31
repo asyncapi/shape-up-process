@@ -1,35 +1,8 @@
 [
   {
     "issue_number": 16,
-    "percentage": 10,
-    "history": [
-      {
-        "percentage": 10,
-        "status": "Oh oh! Caca no esperada.",
-        "statusMarkdown": "\r\n\r\nOh oh! Caca no esperada.",
-        "createdAt": "2020-10-31T11:18:23Z",
-        "updatedAt": "2020-10-31T11:18:23Z",
-        "author": {
-          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
-          "name": "Fran Méndez",
-          "url": "https://github.com/fmvilas"
-        },
-        "url": "https://github.com/asyncapi/shape-up-process/issues/16#issuecomment-719919835"
-      },
-      {
-        "percentage": 34,
-        "status": "Aun estoy viendo como hacer esto. Me ha surgido un problema que no esperaba y tengo que ver como se hace.",
-        "statusMarkdown": "\r\n\r\nAun estoy viendo como hacer esto. Me ha surgido un problema que no esperaba y tengo que ver como se hace.",
-        "createdAt": "2020-10-31T11:16:08Z",
-        "updatedAt": "2020-10-31T11:16:08Z",
-        "author": {
-          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
-          "name": "Fran Méndez",
-          "url": "https://github.com/fmvilas"
-        },
-        "url": "https://github.com/asyncapi/shape-up-process/issues/16#issuecomment-719919606"
-      }
-    ]
+    "percentage": 0,
+    "history": []
   },
   {
     "issue_number": 17,
