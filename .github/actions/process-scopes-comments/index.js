@@ -13,23 +13,35 @@ async function start () {
       `
       query scopesWithComments($owner: String!, $repo: String!) {
         repository(owner: $owner, name: $repo) {
-          issues(
-            labels: ["Scope"]
-            last: 100
-          ) {
+          issues(labels: ["Scope"], last: 100) {
             edges {
               node {
                 number
+                closed
+                closedAt
                 comments(last: 100) {
                   edges {
                     node {
                       body
                       bodyText
-                      url
                       createdAt
                       updatedAt
+                      url
                       author {
                         avatarUrl(size: 100)
+                        ... on User {
+                          name
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+                timelineItems(last: 100) {
+                  nodes {
+                    ... on ClosedEvent {
+                      url
+                      actor {
                         ... on User {
                           name
                           url
@@ -53,8 +65,8 @@ async function start () {
     const result = scopesWithComments.repository.issues.edges.map(sc => {
       return {
         issue_number: sc.node.number,
-        percentage: getCurrentPercentage(sc.node.comments.edges.map(edge => edge.node.bodyText)),
-        history: sc.node.comments.edges.reverse().map(edge => getHistoryPoint(edge.node)).filter(Boolean),
+        percentage: sc.node.closed === false ? 100 : getCurrentPercentage(sc.node.comments.edges.map(edge => edge.node.bodyText)),
+        history: getHistory(sc.node),
       }
     })
 
@@ -93,6 +105,24 @@ function getStatus(comment = '') {
   const matches = comment.match(/^\/progress[\s]+[\d\n]+(.*)/s)
   if (matches && matches.length === 2) return matches[1]
   return null
+}
+
+function getHistory(scope) {
+  const historyPoints = scope.comments.edges.map(edge => getHistoryPoint(edge.node)).filter(Boolean)
+  if (scope.closed) {
+    const closedEvent = scope.timelineItems.nodes.find(node => node.actor)
+    historyPoints.push({
+      percentage: 100,
+      status: null,
+      statusMarkdown: null,
+      createdAt: scope.closedAt,
+      updatedAt: scope.closedAt,
+      author: closedEvent.actor,
+      url: closedEvent.url,
+    })
+  }
+
+  return historyPoints.reverse()
 }
 
 function getHistoryPoint(commentObject) {
