@@ -32,24 +32,22 @@ export default function HillChart({ scopes = [] }) {
   }
   
   return (
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" className="w-full" viewBox="0 0 820 260">
-        <g transform="translate(15, 15)">
-          <path className="stroke-gray-200" fill="none" strokeWidth="1.5" d="M0,205H790" />
-          <path className="stroke-gray-200" fill="none" strokeDasharray="2 2" strokeWidth="1.5" d="M395,0V195" />
-          <path className="stroke-gray-200" fill="none" strokeWidth="1.5"  d={generateCurvePoints()} />
-          <text x="23%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Figuring things out</text>
-          <text x="73%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Making it happen</text>
-          <g>
-            {
-              dots.map((dot, index) => (
-                <circle key={index} title={dot.text} fill={dot.color} className="stroke-white" r="10" cx={dot.x} cy={dot.y} />
-              ))
-            }
-          </g>
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-full" viewBox="0 0 820 260">
+      <g transform="translate(15, 15)">
+        <path className="stroke-gray-200" fill="none" strokeWidth="1.5" d="M0,205H790" />
+        <path className="stroke-gray-200" fill="none" strokeDasharray="2 2" strokeWidth="1.5" d="M395,0V195" />
+        <path className="stroke-gray-200" fill="none" strokeWidth="1.5"  d={generateCurvePoints()} />
+        <text x="23%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Figuring things out</text>
+        <text x="73%" y="230" textAnchor="middle" className="fill-gray-500 uppercase text-xs">Making it happen</text>
+        <g>
+          {
+            dots.map((dot, index) => (
+              <circle key={index} title={dot.text} fill={dot.color} className="stroke-white" r="10" cx={dot.x} cy={dot.y} />
+            ))
+          }
         </g>
-      </svg>
-    </div>
+      </g>
+    </svg>
   )
 }
 
