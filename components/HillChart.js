@@ -13,13 +13,23 @@ export default function HillChart({ scopes = [] }) {
     }
   })
 
-  dots.forEach(dot => {
-    dots.forEach((d, index) => {
-      if ((dot.id !== d.id && (Math.abs(d.y - dot.y) < 10 || Math.abs(d.x - dot.x) < 10))) {
-        d.y = d.y - 15 * index
-      }
-    })
-  })
+  function groupDotsByProximity(dotsArray) {
+    return dotsArray.reduce(function (acc, dot) {
+      let key = Math.floor(dot.x / 10) * 10
+      const arr = acc.has(key) ? acc.get(key) : []
+      arr.push(dot)
+      acc.set(key, arr)
+      return acc
+    }, new Map())
+  }
+
+  for (let groupedDots of groupDotsByProximity(dots).values()) {
+    if (groupedDots.length > 1) {
+      groupedDots = groupedDots.map((groupedDot, index) => {
+        groupedDot.y = groupedDot.y - index * 15
+      })
+    }
+  }
   
   return (
     <div>

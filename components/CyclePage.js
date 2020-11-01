@@ -32,7 +32,11 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 
   function onScopeChange({ issue, toggled }) {
     setSelectedScopes(visibleScopes.filter(scope => {
-      return issue.number !== scope.number || toggled ? scope : false
+      if (issue.number === scope.number) {
+        return toggled
+      } else {
+        return !!selectedScopes.find(s => s.number === scope.number)
+      }
     }))
   }
 
