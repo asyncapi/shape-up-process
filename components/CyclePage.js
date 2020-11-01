@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
 import Bet from '../components/Bet'
@@ -12,15 +12,19 @@ import colors from '../components/colors'
 import data from '../data.json'
 import progress from '../progress.json'
 
-export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, bets, scopes }) {
-  const [visibleBet, setVisibleBet] = useState(bets[0])
-  const [visibleScopes, setVisibleScopes] = useState(scopes.filter(scope => belongsToBet(bets[0], scope)))
-  const [selectedScopes, setSelectedScopes] = useState(scopes.filter(scope => belongsToBet(bets[0], scope)))
+export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availableBets = [], defaultVisibleBet, availableScopes = [], defaultVisibleScopes }) {
+  const [visibleBet, setVisibleBet] = useState(defaultVisibleBet)
+  const [visibleScopes, setVisibleScopes] = useState(defaultVisibleScopes)
+  const [selectedScopes, setSelectedScopes] = useState(defaultVisibleScopes)
+
+  useEffect(() => {
+    onBetChange({ issue: defaultVisibleBet, toggled: true })
+  }, [defaultVisibleBet])
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
       setVisibleBet(issue)
-      const allScopesFromBet = scopes.filter(scope => belongsToBet(issue, scope))
+      const allScopesFromBet = availableScopes.filter(scope => belongsToBet(issue, scope))
       setVisibleScopes(allScopesFromBet)
       setSelectedScopes(allScopesFromBet)
     }
@@ -32,13 +36,7 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
     }))
   }
 
-  function belongsToBet(bet, scope) {
-    if (!bet) return false
-    if (!scope || !scope.parent_epics || scope.parent_epics.length === 0) return false
-    return !!scope.parent_epics.find(pe => pe.issue_number === bet.number && pe.repo_id === bet.repo_id)
-  }
-
-  const history = selectedScopes.map(scope => {
+  const history = (selectedScopes || []).map(scope => {
     return scope.progress.history.map(h => {
       return {
         progress: h,
@@ -84,8 +82,8 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 
                 <div>
                   {
-                    bets.map((bet, index) => (
-                      <Bet key={index} issue={bet} toggled={bet.issue_number === visibleBet.issue_number} className="mt-3" onChange={onBetChange} />
+                    availableBets.map((bet, index) => (
+                      <Bet key={index} issue={bet} toggled={visibleBet && bet.issue_number === visibleBet.issue_number} className="mt-3" onChange={onBetChange} />
                     ))
                   }
                   {
@@ -106,12 +104,12 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 
                 <div>
                   {
-                    visibleScopes.map((scope, index) => (
+                    (visibleScopes || []).map((scope, index) => (
                       <Scope key={index} toggled={!!selectedScopes.find(s => s.number === scope.number)} issue={scope} onChange={onScopeChange} className="mt-3" />
                     ))
                   }
                   {
-                    !visibleScopes.length && (
+                    !(visibleScopes || []).length && (
                       <p className="italic text-sm text-gray-400 mt-4">No scopes have been created yet.</p>
                     )
                   }
@@ -175,7 +173,7 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
               <HillChart scopes={selectedScopes} />
               <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
                 {
-                  selectedScopes.map((scope, index) => (
+                  (selectedScopes || []).map((scope, index) => (
                     <ChartLegend key={index} issue={scope} className="mt-3" />
                   ))
                 }
@@ -227,18 +225,27 @@ export async function getStaticProps({ params }) {
   data.nextCycle = visibleCycleIndex < data.cycles.length - 1 ? data.cycles[visibleCycleIndex + 1] : null
   data.inCycle = inCycle
 
-  data.bets = data.bets.filter(b => b.milestone && data.visibleCycle && b.milestone.id === data.visibleCycle.id)
+  data.availableBets = data.bets.filter(b => b.milestone && data.visibleCycle && b.milestone.id === data.visibleCycle.id)
 
-  data.scopes = data.scopes.map(scope => {
+  data.availableScopes = data.scopes.map(scope => {
     const scopeProgress = progress.find(p => p.issue_number === scope.number)
     scope.progress = scopeProgress || null
     scope.color = nearestColor.from(colors)(stringToColor(scope.title))
     return scope
   })
 
+  data.defaultVisibleBet = data.availableBets[0] || null
+  data.defaultVisibleScopes = data.availableScopes.filter(scope => belongsToBet(data.defaultVisibleBet, scope))
+
   return {
     props: {
       ...data,
     },
   }
+}
+
+function belongsToBet(bet, scope) {
+  if (!bet) return false
+  if (!scope || !scope.parent_epics || scope.parent_epics.length === 0) return false
+  return !!scope.parent_epics.find(pe => pe.issue_number === bet.number && pe.repo_id === bet.repo_id)
 }

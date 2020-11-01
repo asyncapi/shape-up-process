@@ -1,16 +1,9 @@
 import data from '../../data.json'
 import CyclePage, { getStaticProps as getStaticPropsFunction } from '../../components/CyclePage'
 
-export default function Cycle({ visibleCycle, previousCycle, nextCycle, inCycle, bets, scopes }) {
+export default function Cycle(props) {
   return (
-    <CyclePage
-      visibleCycle={visibleCycle}
-      previousCycle={previousCycle}
-      nextCycle={nextCycle}
-      inCycle={inCycle}
-      bets={bets}
-      scopes={scopes}
-    />
+    <CyclePage {...props} />
   )
 }
 
