@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node scripts/build-data.js && next dev",
     "build": "node scripts/build-data.js && next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@tailwindcss/ui": "^0.6.2",
