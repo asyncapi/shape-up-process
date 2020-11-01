@@ -4,5 +4,4 @@
     X-Frame-Options = "ALLOW-FROM https://www.youtube.com/"
 
 [build]
-  command = "npm run build"
-  publish = "public"
+  command = "npm run build && npm start"
