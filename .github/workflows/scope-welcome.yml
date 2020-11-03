@@ -1,0 +1,44 @@
+on:
+  issues:
+    types: [opened, labeled]
+name: Show instructions for scopes
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Comment with instructions
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          if (context.issue.labels.find(l => l.name === 'Scope')) {
+            await github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hey! You've labeled this issue as a Scope. Remember you can use the following command to inform about its progress:' +
+                    '\n' +
+                    '```\n' +
+                    '/progress <percentage> [message]\n' +
+                    '```\n' +
+                    'or\n' +
+                    '```\n' +
+                    '/progress <percentage>\n\n' +
+                    'mutiline\n' +
+                    'message\n' +
+                    '```\n\n' +
+                    '##### Example:\n' +
+                    '```\n' +
+                    '/percentage 40 We\'re still figuring out how to implement this. We have an idea but is not yet confirmed it will work.\n' +
+                    '```\n\n' +
+                    '```\n' +
+                    '/percentage 50\n\n' +
+                    'A few notes:\n\n' +
+                    '* We got this figured out :tada:\n' +
+                    '* We're going to use [this library](#link-to-website) to avoid losing time implementing this algorithm.\n' +
+                    '* We decided to go for the quickest solution and will improve it if we got time at the end of the cycle.\n' +
+                    '```'
+            })
+          }
