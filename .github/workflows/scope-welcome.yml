@@ -18,7 +18,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Hey! You've labeled this issue as a Scope. Remember you can use the following command to inform about its progress:' +
+              body: 'Hey! You\'ve labeled this issue as a Scope. Remember you can use the following command to inform about its progress:' +
                     '\n' +
                     '```\n' +
                     '/progress <percentage> [message]\n' +
@@ -37,7 +37,7 @@ jobs:
                     '/percentage 50\n\n' +
                     'A few notes:\n\n' +
                     '* We got this figured out :tada:\n' +
-                    '* We're going to use [this library](#link-to-website) to avoid losing time implementing this algorithm.\n' +
+                    '* We\'re going to use [this library](#link-to-website) to avoid losing time implementing this algorithm.\n' +
                     '* We decided to go for the quickest solution and will improve it if we got time at the end of the cycle.\n' +
                     '```'
             })
