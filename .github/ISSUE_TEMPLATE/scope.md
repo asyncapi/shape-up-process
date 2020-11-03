@@ -9,6 +9,6 @@ assignees: ''
 
 ## Remember
 
-* This issue must be an EPIC
-* Point it to the BET epic.
+* This issue must be an **epic**
+* Point it to its corresponding **Bet epic**.
 * Craft a good description :wink:
