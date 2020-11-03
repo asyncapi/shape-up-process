@@ -13,7 +13,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          if (context.issue.labels.find(l => l.name === 'Scope')) {
+          if (context.payload.issue && context.payload.issue.labels.find(l => l.name === 'Scope')) {
             await github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
