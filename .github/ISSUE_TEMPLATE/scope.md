@@ -7,4 +7,8 @@ assignees: ''
 
 ---
 
+## Remember
 
+* This issue must be an EPIC
+* Point it to the BET epic.
+* Craft a good description :wink:
