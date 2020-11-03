@@ -165,7 +165,7 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
                   </Link>
                 </div>
               </div>
-              <p className="my-4 text-gray-500">The {inCycle ? 'current' : 'this'} cycle {inCycle ? 'started' : 'starts'} on {new Date(visibleCycle.start_date).toDateString()} and will finish on {new Date(visibleCycle.due_on).toDateString()}.</p>
+              <p className="my-4 text-gray-500">{inCycle ? 'The current' : 'This'} cycle {inCycle ? 'started' : 'starts'} on {new Date(visibleCycle.start_date).toDateString()} and will finish on {new Date(visibleCycle.due_on).toDateString()}.</p>
               <HillChart scopes={selectedScopes} />
               <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
                 {
