@@ -1,7 +1,7 @@
 on:
   push:
   issues:
-    types: [opened, deleted, closed, reopened, labeled, unlabeled]
+    types: [opened, deleted, closed, reopened, labeled, unlabeled, milestoned, demilestoned]
   issue_comment:
     types: [created, edited, deleted]
 name: Process changes and deploy
