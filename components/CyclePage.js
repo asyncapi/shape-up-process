@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
-import Bet from '../components/Bet'
-import HillChart from '../components/HillChart'
-import Scope from '../components/Scope'
-import ChartLegend from '../components/ChartLegend'
-import HistoryStatusUpdate from '../components/HistoryStatusUpdate'
-import colors from '../components/colors'
+import Bet from './Bet'
+import HillChart from './HillChart'
+import Scope from './Scope'
+import ChartLegend from './ChartLegend'
+import HistoryStatusUpdate from './HistoryStatusUpdate'
+import colors from './colors'
 import data from '../data.json'
 import progress from '../progress.json'
+import Header from './Header'
+import Footer from './Footer'
 
 export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availableBets = [], defaultVisibleBet, availableScopes = [], defaultVisibleScopes }) {
   const [visibleBet, setVisibleBet] = useState(defaultVisibleBet)
@@ -56,23 +58,13 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
   return (
     <>
       <Head>
-        <title>Shape Up Dashboard</title>
+        <title>AsyncAPI - Shape Up Dashboard</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className="bg-white">
-        <div className="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-          <div className="lg:flex lg:justify-between">
-            <div className="max-w-xl">
-              <Link href="/">
-                <a><h2 className="text-4xl leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">Shape Up 🏋️‍♀️</h2></a>
-              </Link>
-              <p className="mt-5 text-xl leading-7 text-gray-500">This dashboard shows the progress we're making during this 6-weeks cycle.</p>
-            </div>
-            <div className="mt-10 w-full max-w-xs">
-              Logo
-            </div>
-          </div>
+        <div className="max-w-screen-xl mx-auto py-16 px-4 sm:py-16 sm:px-6 lg:px-8">
+          <Header />
 
           <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-4">
             <div>
@@ -202,6 +194,8 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 
         </div>
       </div>
+
+      <Footer />
     </>
   )
 }
