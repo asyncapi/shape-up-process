@@ -25,11 +25,13 @@ async function start () {
       },
     })
     const issues = await res.json()
+    const pitches = issues.filter(iss => iss.labels.length && iss.labels.find(label => label.name === 'Pitch'))
     const bets = issues.filter(iss => iss.labels.length && iss.labels.find(label => label.name === 'Bet'))
     const scopes = issues.filter(iss => iss.labels.length && iss.labels.find(label => label.name === 'Scope'))
 
     const result = {
       cycles,
+      pitches,
       bets,
       scopes,
     }
