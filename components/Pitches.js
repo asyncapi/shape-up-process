@@ -12,7 +12,7 @@ export default function Pitches({ pitches = [] }) {
         {
           pitches.map((pitch, index) => (
             <li className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow">
-              <a href={pitch.html_url} target="_blank" className="flex-1 flex flex-col p-8 bg-cover rounded-tl-lg rounded-tr-lg" style={{ backgroundImage: `url('/img/backgrounds/${index % 9 + 1}.png')` }}>
+              <a href={pitch.html_url} target="_blank" className="flex-1 flex flex-col p-8 bg-cover rounded-tl-lg rounded-tr-lg" style={{ backgroundImage: `url('/img/backgrounds/${index % 9 + 1}.webp')` }}>
                 <span className="mt-6 text-gray-900 text-2xl leading-normal font-medium">{pitch.title}</span>
                 <dl className="mt-1 flex-grow flex flex-col justify-between">
                   <dt className="sr-only">Appetite</dt>
