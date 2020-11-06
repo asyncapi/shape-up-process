@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
@@ -40,12 +39,6 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
         return !!selectedScopes.find(s => s.number === scope.number)
       }
     }))
-  }
-
-  function isFutureCycle(cycle) {
-    const now = new Date()
-    const startDate = new Date(cycle.start_date)
-    return startDate > now
   }
 
   const history = (selectedScopes || []).map(scope => {
