@@ -36,5 +36,37 @@
         "url": "https://github.com/asyncapi/shape-up-process/issues/17#event-3823721871"
       }
     ]
+  },
+  {
+    "issue_number": 22,
+    "percentage": 50,
+    "history": [
+      {
+        "percentage": 50,
+        "status": "",
+        "statusMarkdown": "",
+        "createdAt": "2020-11-09T17:40:46Z",
+        "updatedAt": "2020-11-09T17:40:46Z",
+        "author": {
+          "avatarUrl": "https://avatars3.githubusercontent.com/u/6995927?s=100&u=e1e71bb555837351bf1d10f9faec4a9e9076f107&v=4",
+          "name": "Lukasz Gornicki",
+          "url": "https://github.com/derberg"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/22#issuecomment-724165866"
+      },
+      {
+        "percentage": 40,
+        "status": "We're still figuring out something.",
+        "statusMarkdown": "We're still figuring out something.",
+        "createdAt": "2020-11-09T13:05:25Z",
+        "updatedAt": "2020-11-09T13:05:25Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/22#issuecomment-723999941"
+      }
+    ]
   }
 ]
