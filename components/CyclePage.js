@@ -53,6 +53,7 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
   })
 
   const isPastCycle = new Date(visibleCycle.due_on) < new Date()
+  const isFutureCycle = new Date(visibleCycle.start_date) > new Date()
 
   return (
     <>
@@ -114,9 +115,9 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
             <div className="lg:col-span-3">
               <CycleHeader visibleCycle={visibleCycle} inCycle={inCycle} isPastCycle={isPastCycle} previousCycle={previousCycle} nextCycle={nextCycle} />
               {
-                isPastCycle ?
-                  (<CycleDetails selectedScopes={selectedScopes} history={history} />) :
-                  (<Pitches pitches={availablePitches} />)
+                isFutureCycle ?
+                  (<Pitches pitches={availablePitches} />) :
+                  (<CycleDetails selectedScopes={selectedScopes} history={history} />)
               }
             </div>
           </div>
