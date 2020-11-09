@@ -39,8 +39,21 @@
   },
   {
     "issue_number": 22,
-    "percentage": 50,
+    "percentage": 30,
     "history": [
+      {
+        "percentage": 30,
+        "status": "figured out there are more dependencies that need to be checked",
+        "statusMarkdown": "\r\n\r\nfigured out there are more dependencies that need to be checked",
+        "createdAt": "2020-11-09T17:48:21Z",
+        "updatedAt": "2020-11-09T17:48:21Z",
+        "author": {
+          "avatarUrl": "https://avatars3.githubusercontent.com/u/6995927?s=100&u=e1e71bb555837351bf1d10f9faec4a9e9076f107&v=4",
+          "name": "Lukasz Gornicki",
+          "url": "https://github.com/derberg"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/22#issuecomment-724170160"
+      },
       {
         "percentage": 50,
         "status": "",
