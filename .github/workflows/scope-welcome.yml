@@ -13,7 +13,6 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          core.setCommandEcho(true)
           const commentBody = 'Hey! You\'ve labeled this issue as a Scope. Remember you can use the following command to inform about its progress:' +
             '\n' +
             '```\n' +
@@ -43,9 +42,7 @@ jobs:
             repo: context.repo.repo
           })
 
-          console.log(comments)
-
-          for (const comment of comments) {
+          for (const comment of comments.data) {
             if (comment.body === commentBody) return
           }
 
