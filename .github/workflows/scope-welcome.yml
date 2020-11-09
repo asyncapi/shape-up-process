@@ -11,7 +11,7 @@ jobs:
     - name: Comment with instructions
       uses: actions/github-script@v3
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GH_TOKEN }}
         script: |
           const commentBody = 'Hey! You\'ve labeled this issue as a Scope. Remember you can use the following command to inform about its progress:' +
             '\n' +
