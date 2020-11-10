@@ -1,0 +1,5 @@
+name: 'Trigger Netlify deploy'
+description: 'Triggers a Netlify deploy without uploading any files'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
