@@ -32,7 +32,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git commit -m "Update progress.json" -a || true
         git fetch origin master
-        git commit -m "Merging with master" || true
+        git pull --no-edit || true
         git push origin master
     
     - name: Commit to regenerate data.json
@@ -41,6 +41,5 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Trigger deploy" --allow-empty
-        git fetch origin master
-        git commit -m "Merging with master" || true
+        git pull --no-edit || true
         git push origin master
