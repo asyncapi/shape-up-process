@@ -34,17 +34,16 @@ jobs:
         git commit -m "Update progress.json" -a || true
         git pull --no-edit || true
     
-    - name: Commit to regenerate data.json
-      if: github.event_name == 'issues' || github.event_name == 'milestone'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git config --local pull.rebase false
-        git commit -m "Trigger deploy" --allow-empty
-        git pull --no-edit || true
-
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: master
+    
+    - name: Deploy to Netlify
+      if: github.event_name == 'issues' || github.event_name == 'milestone'
+      uses: jsmrcaga/action-netlify-deploy@v1.1.0
+      with:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_DEPLOY_TO_PROD: true
