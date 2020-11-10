@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:current-stretch-slim
 
 ADD entrypoint.sh /entrypoint.sh
 ADD action.yml /action.yml
