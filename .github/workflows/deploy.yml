@@ -33,6 +33,7 @@ jobs:
         git commit -m "Update progress.json" -a || true
         git fetch origin master
         git commit -m "Merging with master" || true
+        git push origin master
     
     - name: Commit to regenerate data.json
       if: github.event_name == 'issues' || github.event_name == 'milestone'
@@ -42,9 +43,4 @@ jobs:
         git commit -m "Trigger deploy" --allow-empty
         git fetch origin master
         git commit -m "Merging with master" || true
-
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        git push origin master
