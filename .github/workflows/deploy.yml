@@ -30,16 +30,21 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git config --local pull.rebase false
         git commit -m "Update progress.json" -a || true
-        git fetch origin master
         git pull --no-edit || true
-        git push origin master
     
     - name: Commit to regenerate data.json
       if: github.event_name == 'issues' || github.event_name == 'milestone'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git config --local pull.rebase false
         git commit -m "Trigger deploy" --allow-empty
         git pull --no-edit || true
-        git push origin master
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
