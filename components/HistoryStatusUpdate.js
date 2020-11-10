@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import GithubFlavoredMarkdown from 'remark-gfm'
+import RemarkEmoji from 'remark-emoji'
 
 export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
   function fullDateTime() {
@@ -45,7 +46,7 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
           </div>
         </div>
       </div>
-      <ReactMarkdown plugins={[GithubFlavoredMarkdown]} className="mt-4 mb-8 markdown-body">
+      <ReactMarkdown plugins={[GithubFlavoredMarkdown, RemarkEmoji]} className="mt-4 mb-8 markdown-body">
         {statusUpdate.progress.statusMarkdown}
       </ReactMarkdown>
     </div>
