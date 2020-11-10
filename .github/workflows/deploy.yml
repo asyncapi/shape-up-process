@@ -1,3 +1,4 @@
+name: Process changes and deploy
 on:
   push:
   issues:
@@ -6,18 +7,16 @@ on:
     types: [created, edited, deleted]
   milestone:
     types: [created, edited, deleted]
-name: Process changes and deploy
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-latest]
 
     steps:
-    - name: Cancel previous builds
-      uses: styfle/cancel-workflow-action@0.6.0
-      with:
-        access_token: ${{ secrets.GITHUB_TOKEN }}
-
     - uses: actions/checkout@master
       with:
         persist-credentials: false
