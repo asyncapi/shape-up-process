@@ -10,6 +10,11 @@ export default function Pitches({ pitches = [] }) {
     <div>
       <ul className="my-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {
+          !pitches.length && (
+            <p className="italic text-sm text-gray-400 mt-4">No pitches have been suggested yet.</p>
+          )
+        }
+        {
           pitches.map((pitch, index) => (
             <li className="col-span-1 flex flex-col text-center bg-white rounded-lg shadow">
               <a href={pitch.html_url} target="_blank" className="flex-1 flex flex-col p-8 bg-cover rounded-tl-lg rounded-tr-lg" style={{ backgroundImage: `url('/img/backgrounds/${index % 9 + 1}.webp')` }}>
