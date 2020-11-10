@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Cancel previous builds
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+
     - uses: actions/checkout@master
       with:
         persist-credentials: false
         fetch-depth: 0 
-
-    - name: Cancel previous builds
-      uses: n1hility/cancel-previous-runs@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Process scope issue comments
       uses: ./.github/actions/process-scopes-comments
