@@ -30,8 +30,14 @@ jobs:
         repo_owner: asyncapi
         repo_name: shape-up-process
     
-    - name: Commit files
+    - name: Update progress.json
+      # if: |
+      #   github.event_name === 'issue_comment.created' ||
+      #   github.event_name === 'issue_comment.edited' ||
+      #   github.event_name === 'issue_comment.deleted'
       run: |
+        core.setCommandEcho(true)
+        console.log(github.event_name)
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Update progress.json" -a || true
