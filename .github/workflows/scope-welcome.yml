@@ -21,12 +21,12 @@ jobs:
             'or\n' +
             '```\n' +
             '/progress <percentage>\n\n' +
-            'mutiline\n' +
-            'message\n' +
+            'A mutiline message.\n' +
+            'It supports **Markdown**.\n' +
             '```\n\n' +
             '##### Example:\n' +
             '```\n' +
-            '/percentage 40 We\'re still figuring out how to implement this. We have an idea but is not yet confirmed it will work.\n' +
+            '/percentage 40 We\'re still figuring out how to implement this. We have an idea but it is not yet confirmed it will work.\n' +
             '```\n\n' +
             '```\n' +
             '/percentage 50\n\n' +
@@ -34,7 +34,11 @@ jobs:
             '* We got this figured out :tada:\n' +
             '* We\'re going to use [this library](#link-to-website) to avoid losing time implementing this algorithm.\n' +
             '* We decided to go for the quickest solution and will improve it if we got time at the end of the cycle.\n' +
-            '```'
+            '```\n' +
+            '\n' +
+            '---\n' +
+            '\n' +
+            ':weight_lifting_woman See the progress on the [Shape Up Dashboard](https://shapeup.asyncapi.io).\n'
 
           const comments = await github.issues.listComments({
             issue_number: context.issue.number,
