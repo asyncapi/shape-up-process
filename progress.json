@@ -39,8 +39,21 @@
   },
   {
     "issue_number": 24,
-    "percentage": 35,
+    "percentage": 80,
     "history": [
+      {
+        "percentage": 80,
+        "status": "It's almost done now! 💪",
+        "statusMarkdown": "\r\n\r\nIt's almost done now! :muscle:",
+        "createdAt": "2020-11-10T14:47:38Z",
+        "updatedAt": "2020-11-10T14:47:38Z",
+        "author": {
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/242119?s=100&u=808dc85b3f7bfca550d5aa223b76cd9588074ea7&v=4",
+          "name": "Fran Méndez",
+          "url": "https://github.com/fmvilas"
+        },
+        "url": "https://github.com/asyncapi/shape-up-process/issues/24#issuecomment-724748859"
+      },
       {
         "percentage": 35,
         "status": "",
