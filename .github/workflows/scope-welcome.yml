@@ -38,7 +38,7 @@ jobs:
             '\n' +
             '---\n' +
             '\n' +
-            ':weight_lifting_woman See the progress on the [Shape Up Dashboard](https://shapeup.asyncapi.io).\n'
+            ':weight_lifting_woman: See the progress on the [Shape Up Dashboard](https://shapeup.asyncapi.io).\n'
 
           const comments = await github.issues.listComments({
             issue_number: context.issue.number,
