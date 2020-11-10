@@ -40,10 +40,11 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: master
     
-    - name: Deploy to Netlify
+    - name: Trigger deploy on Netlify
       if: github.event_name == 'issues' || github.event_name == 'milestone'
-      uses: jsmrcaga/action-netlify-deploy@v1.1.0
       with:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_DEPLOY_TO_PROD: true
+      run: |
+        npm i -g netlify-cli
+        netlify deploy --trigger --prod
