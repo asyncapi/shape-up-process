@@ -31,16 +31,18 @@ jobs:
         repo_name: shape-up-process
     
     - name: Update progress.json
-      # if: |
-      #   github.event_name === 'issue_comment.created' ||
-      #   github.event_name === 'issue_comment.edited' ||
-      #   github.event_name === 'issue_comment.deleted'
+      if: github.event_name == 'issue_comment'
       run: |
-        core.setCommandEcho(true)
-        console.log(github.event_name)
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Update progress.json" -a || true
+    
+    - name: Commit to regenerate data.json
+      if: github.event_name == 'issues' || github.event_name == 'milestone'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Trigger deploy" --allow-empty
 
     - name: Push changes
       uses: ad-m/github-push-action@master
