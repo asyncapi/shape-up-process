@@ -42,9 +42,9 @@ jobs:
     
     - name: Trigger deploy on Netlify
       if: github.event_name == 'issues' || github.event_name == 'milestone'
-      with:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       run: |
         npm i -g netlify-cli
         netlify deploy --trigger --prod
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
