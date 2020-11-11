@@ -19,6 +19,7 @@ jobs:
         fetch-depth: 0 
 
     - name: Process scope issue comments
+      if: github.event_name == 'issue_comment'
       uses: ./.github/actions/process-scopes-comments
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,6 +36,7 @@ jobs:
         git pull --no-edit || true
     
     - name: Push changes
+      if: github.event_name == 'issue_comment'
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
