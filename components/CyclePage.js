@@ -6,7 +6,6 @@ import Bet from './Bet'
 import Scope from './Scope'
 import colors from './colors'
 import data from '../data.json'
-import progress from '../progress.json'
 import Header from './Header'
 import Footer from './Footer'
 import Pitches from './Pitches'
@@ -157,7 +156,7 @@ export async function getStaticProps({ params }) {
   data.availableBets = data.bets.filter(b => b.milestone && data.visibleCycle && b.milestone.id === data.visibleCycle.id)
 
   data.availableScopes = data.scopes.map(scope => {
-    const scopeProgress = progress.find(p => p.issue_number === scope.number)
+    const scopeProgress = data.progress.find(p => p.issue_number === scope.number)
     scope.progress = scopeProgress || null
     scope.color = nearestColor.from(colors)(stringToColor(scope.title))
     return scope

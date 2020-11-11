@@ -1,4 +1,4 @@
-name: Process changes and deploy
+name: Deploy to Netlify
 on:
   push:
   issues:
@@ -13,35 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
-      with:
-        persist-credentials: false
-        fetch-depth: 0 
-
-    - name: Process scope issue comments
-      if: github.event_name == 'issue_comment'
-      uses: ./.github/actions/process-scopes-comments
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        repo_owner: asyncapi
-        repo_name: shape-up-process
-    
-    - name: Update progress.json
-      if: github.event_name == 'issue_comment'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git config --local pull.rebase false
-        git commit -m "Update progress.json" -a || true
-        git pull --no-edit || true
-    
-    - name: Push changes
-      if: github.event_name == 'issue_comment'
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
-    
     - name: Trigger deploy on Netlify
       if: github.event_name == 'issues' || github.event_name == 'milestone'
       run: |
