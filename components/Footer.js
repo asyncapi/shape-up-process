@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 export default function Footer() {
   return (
     <footer className="bg-white">
@@ -18,7 +16,7 @@ export default function Footer() {
             </svg>
           </a>
           <a href="https://app.netlify.com/sites/asyncapi-shape-up/deploys" target="_blank" title="Netlify Status">
-            <Image src="https://api.netlify.com/api/v1/badges/fa8eb6a5-e8b7-403b-a44a-a11f3a7877aa/deploy-status" width="136" height="20" />
+            <img src="https://api.netlify.com/api/v1/badges/fa8eb6a5-e8b7-403b-a44a-a11f3a7877aa/deploy-status" width="136" height="20" />
           </a>
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
