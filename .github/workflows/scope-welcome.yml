@@ -26,10 +26,10 @@ jobs:
             '```\n\n' +
             '##### Example:\n' +
             '```\n' +
-            '/percentage 40 We\'re still figuring out how to implement this. We have an idea but it is not yet confirmed it will work.\n' +
+            '/progress 40 We\'re still figuring out how to implement this. We have an idea but it is not yet confirmed it will work.\n' +
             '```\n\n' +
             '```\n' +
-            '/percentage 50\n\n' +
+            '/progress 50\n\n' +
             'A few notes:\n\n' +
             '* We got this figured out :tada:\n' +
             '* We\'re going to use [this library](#link-to-website) to avoid losing time implementing this algorithm.\n' +
