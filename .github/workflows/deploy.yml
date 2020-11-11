@@ -1,6 +1,5 @@
 name: Deploy to Netlify
 on:
-  push:
   issues:
     types: [opened, deleted, closed, reopened, labeled, unlabeled, milestoned, demilestoned]
   issue_comment:
