@@ -10,7 +10,7 @@ export default function Header() {
         <Link href="/">
           <a>
             <h2 className="text-4xl leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">
-              <span className="gradient-animated">Shape Up</span> 🏋️‍♀️
+              <span className="shapeup-animated-gradient">Shape Up</span> 🏋️‍♀️
             </h2>
           </a>
         </Link>

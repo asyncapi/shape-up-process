@@ -12,28 +12,17 @@
 
 /* Your own custom utilities */
 
-.gradient-animated {
-  background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
-  background-size: 300% 100%;
+.shapeup-animated-gradient {
+  background: linear-gradient(230deg, #e74694, #4b79cf, #4bc5cf, #4b79cf, #e74694);
+  background-size: 500% 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-animation: GradientAnimation 20s ease infinite;
-  -moz-animation: GradientAnimation 20s ease infinite;
-  animation: GradientAnimation 20s ease infinite;
+  -webkit-animation: GradientAnimation 50s ease infinite alternate;
+  -moz-animation: GradientAnimation 50s ease infinite alternate;
+  animation: GradientAnimation 50s ease infinite alternate;
 }
 
-@-webkit-keyframes GradientAnimation {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes GradientAnimation {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
 @keyframes GradientAnimation {
     0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+    100%{background-position:200% 50%}
 }
