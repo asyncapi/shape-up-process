@@ -10,7 +10,7 @@ export default function Header() {
         <Link href="/">
           <a><h2 className="text-4xl leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">Shape Up 🏋️‍♀️</h2></a>
         </Link>
-        <p className="mt-5 text-xl leading-7 text-gray-500">Visualize the progress we're making, one cycle at a time. Don't know what Shape Up is about? <a className="text-pink-500 hover:font-medium" href="https://basecamp.com/shapeup" target="_blank">Learn more.</a></p>
+        <p className="mt-5 text-xl leading-7 text-gray-500">Visualize the progress we're making, one cycle at a time. Don't know what Shape Up is about? <Link href="/introduction"><a className="text-pink-500 font-semibold hover:text-pink-700">Learn more.</a></Link></p>
       </div>
     </div>
   )
