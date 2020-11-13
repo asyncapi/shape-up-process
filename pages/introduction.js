@@ -24,12 +24,12 @@ export default function Help() {
         </Link>
       </div>
 
-      <div class="relative py-16 bg-white overflow-hidden">
-        <div class="relative px-4 sm:px-6 lg:px-8">
-          <div class="prose prose-lg text-gray-500 mx-auto">
-            <p class="text-base text-center leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Introducing</p>
-            <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Shape Up 🏋️‍♀️</h1>
-            
+      <div className="relative py-16 bg-white overflow-hidden">
+        <div className="relative px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-lg text-gray-500 mx-auto">
+            <p className="text-base text-center leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Introducing</p>
+            <h1 className="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Shape Up 🏋️‍♀️</h1>
+
             <p>
               <a href="https://basecamp.com/shapeup" target="_blank">Shape Up</a> is a set of product management techniques originally developed at <a href="https://www.basecamp.com" target="_blank">Basecamp</a>. As per their own words:
             </p>
@@ -58,7 +58,7 @@ export default function Help() {
 
             <h2>Why a hill chart?</h2>
             <p>
-              Work is like hill. You first have to figure out how to do something and then do the actual work. Most of the failing projects have in common that they have tasks you haven't really figured out how you're going to approach them. No blame here. Humans are really bad at estimating time.
+              Work is like a hill. You first have to figure out how to do something and then do the actual work. Most of the failing projects have in common that they have tasks you haven't really figured out how you're going to approach them. No blame here. Humans are really bad at estimating time.
             </p>
             <iframe src="https://adamstoddard.com/demos/over-the-hill.html" className="w-full h-48 md:h-100" />
             <div className="italic text-center text-base text-gray-400">Art by <a href="https://twitter.com/AdamStddrd" target="_blank">Adam Stoddard</a></div>
