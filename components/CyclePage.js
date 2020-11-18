@@ -8,9 +8,7 @@ import colors from './colors'
 import data from '../data.json'
 import Header from './Header'
 import Footer from './Footer'
-import Pitches from './Pitches'
-import CycleDetails from './CycleDetails'
-import CycleHeader from './CycleHeader'
+import Cycle from './Cycle'
 
 export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], defaultVisibleBet, availableScopes = [], defaultVisibleScopes }) {
   const [visibleBet, setVisibleBet] = useState(defaultVisibleBet)
@@ -39,20 +37,6 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
       }
     }))
   }
-
-  const history = (selectedScopes || []).map(scope => {
-    return scope.progress.history.map(h => {
-      return {
-        progress: h,
-        scope,
-      }
-    })
-  }).flat().sort((h1, h2) => {
-    return new Date(h2.updatedAt) - new Date(h1.updatedAt)
-  })
-
-  const isPastCycle = new Date(visibleCycle.due_on) < new Date()
-  const isFutureCycle = new Date(visibleCycle.start_date) > new Date()
 
   return (
     <>
@@ -112,12 +96,15 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
               </div>
             </div>
             <div className="lg:col-span-3">
-              <CycleHeader visibleCycle={visibleCycle} inCycle={inCycle} isPastCycle={isPastCycle} previousCycle={previousCycle} nextCycle={nextCycle} />
-              {
-                isFutureCycle ?
-                  (<Pitches pitches={availablePitches} />) :
-                  (<CycleDetails selectedScopes={selectedScopes} history={history} />)
-              }
+              <Cycle
+                visibleCycle={visibleCycle}
+                inCycle={inCycle}
+                previousCycle={previousCycle}
+                nextCycle={nextCycle}
+                pitches={availablePitches}
+                bets={availableBets}
+                selectedScopes={selectedScopes}
+              />
             </div>
           </div>
 
