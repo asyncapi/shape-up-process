@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Pitches from './Pitches'
 import CycleDetails from './CycleDetails'
 import CycleHeader from './CycleHeader'
