@@ -145,7 +145,7 @@ export async function getStaticProps({ params }) {
   data.availableScopes = data.scopes.map(scope => {
     const scopeProgress = data.progress.find(p => p.issue_number === scope.number)
     scope.progress = scopeProgress || null
-    scope.color = nearestColor.from(colors)(stringToColor(scope.issue_number))
+    scope.color = nearestColor.from(colors)(stringToColor(`${scope.title} ${scope.issue_number}`))
     return scope
   })
 
