@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
@@ -10,14 +11,37 @@ import Header from './Header'
 import Footer from './Footer'
 import Cycle from './Cycle'
 
-export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], defaultVisibleBet, availableScopes = [], defaultVisibleScopes }) {
+export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], availableScopes = [] }) {
+  const router = useRouter()
+  const queryParams = new URLSearchParams(router.asPath.split('?')[1])
+  let defaultVisibleBet = availableBets[0] || null
+  if (queryParams.has('bet')) {
+    defaultVisibleBet = availableBets.find(bet => bet.issue_number === Number(queryParams.get('bet'))) || defaultVisibleBet
+  }
+  const defaultVisibleScopes = availableScopes.filter(scope => belongsToBet(defaultVisibleBet, scope))
+  let defaultSelectedScopes = defaultVisibleScopes
+  if (queryParams.has('scopes')) {
+    defaultSelectedScopes = queryParams.get('scopes').split(',').map(id => availableScopes.find(scope => scope.issue_number === Number(id)))
+  }
+
   const [visibleBet, setVisibleBet] = useState(defaultVisibleBet)
   const [visibleScopes, setVisibleScopes] = useState(defaultVisibleScopes)
-  const [selectedScopes, setSelectedScopes] = useState(defaultVisibleScopes)
+  const [selectedScopes, setSelectedScopes] = useState(defaultSelectedScopes)
 
-  useEffect(() => {
-    onBetChange({ issue: defaultVisibleBet, toggled: true })
-  }, [defaultVisibleBet])
+  function replaceRoute() {
+    queryParams.set('bet', visibleBet.issue_number)
+    queryParams.set('scopes', selectedScopes.map(vs => vs.issue_number))
+    const queryString = queryParams.toString().length ? `?${queryParams.toString()}` : ''
+    router.replace(`/cycles/${visibleCycle.id}${queryString}`, undefined, {
+      shallow: true,
+    })
+  }
+
+  useEffect(replaceRoute, [visibleBet, selectedScopes])
+
+  // useEffect(() => {
+  //   onBetChange({ issue: defaultVisibleBet, toggled: true })
+  // }, [defaultVisibleBet])
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
@@ -148,9 +172,6 @@ export async function getStaticProps({ params }) {
     scope.color = nearestColor.from(colors)(stringToColor(`${scope.title} ${scope.issue_number}`))
     return scope
   })
-
-  data.defaultVisibleBet = data.availableBets[0] || null
-  data.defaultVisibleScopes = data.availableScopes.filter(scope => belongsToBet(data.defaultVisibleBet, scope))
 
   return {
     props: {
