@@ -38,10 +38,11 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
   }
 
   useEffect(replaceRoute, [visibleBet, selectedScopes])
-
-  // useEffect(() => {
-  //   onBetChange({ issue: defaultVisibleBet, toggled: true })
-  // }, [defaultVisibleBet])
+  useEffect(() => {
+    setVisibleBet(availableBets[0])
+    setVisibleScopes(defaultVisibleScopes)
+    setSelectedScopes(defaultVisibleScopes)
+  }, [availableBets, availableScopes])
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
