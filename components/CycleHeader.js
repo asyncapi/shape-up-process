@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function CycleHeader({ visibleCycle, inCycle, previousCycle, nextCycle }) {
+export default function CycleHeader({ visibleCycle, inCycle, previousCycle, nextCycle, isPastCycle }) {
   return (
     <>
       <div className="flex">
@@ -25,7 +25,7 @@ export default function CycleHeader({ visibleCycle, inCycle, previousCycle, next
           </Link>
         </div>
       </div>
-      <p className="my-4 text-gray-500">{inCycle ? 'The current' : 'This'} cycle {inCycle ? 'started' : 'starts'} on {new Date(visibleCycle.start_date).toDateString()} and will finish on {new Date(visibleCycle.due_on).toDateString()}.</p>
+      <p className="my-4 text-gray-500">{inCycle ? 'The current' : 'This'} cycle {isPastCycle || inCycle ? 'started' : 'starts'} on {new Date(visibleCycle.start_date).toDateString()} and {isPastCycle ? 'finished' : 'will finish'} on {new Date(visibleCycle.due_on).toDateString()}.</p>
     </>
   )
 }
