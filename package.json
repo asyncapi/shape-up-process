@@ -14,6 +14,7 @@
     "dotenv": "^8.2.0",
     "github-markdown-css": "^4.0.0",
     "linear-scale": "0.0.3",
+    "luxon": "^1.25.0",
     "nearest-color": "^0.4.4",
     "next": "10.0.0",
     "node-fetch": "^2.6.1",

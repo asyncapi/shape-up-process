@@ -1,11 +1,29 @@
 import Link from 'next/link'
+import { DateTime } from 'luxon'
 
 export default function CycleHeader({ visibleCycle, inCycle, previousCycle, nextCycle, isPastCycle }) {
+  const dueOnDate = DateTime.fromISO(visibleCycle.due_on)
+  const remainingDays = Math.floor(dueOnDate.diffNow('days').toObject().days)
+
   return (
     <>
       <div className="flex">
         <h2 className="flex-1 text-2xl leading-6 font-medium text-gray-900">
-          <a href={visibleCycle.html_url} target="_blank">{visibleCycle.title}</a> {inCycle && (<span className="inline-block transform -translate-y-1.5 ml-2 px-2 py-1 text-teal-800 uppercase text-xs leading-4 font-medium border border-teal-100 rounded-full"> <span className="inline-block mr-1 animate-pulse bg-red-500 rounded-full w-2 h-2"></span> Current cycle</span>)}
+          <a href={visibleCycle.html_url} target="_blank">{visibleCycle.title}</a>
+          {
+            inCycle && (
+              <>
+                <span className="inline-block transform -translate-y-1.5 ml-2 px-2 py-1 text-teal-800 uppercase text-xs leading-4 font-medium border border-teal-100 rounded-full">
+                  <span className="inline-block mr-1 animate-pulse bg-red-500 rounded-full w-2 h-2"></span>
+                  Current cycle
+                </span>
+                
+                <span className="inline-block transform -translate-y-1.5 ml-2 px-2 py-1 text-indigo-800 uppercase text-xs leading-4 font-medium border border-indigo-100 rounded-full">
+                  { remainingDays } days remaining
+                </span>
+              </>
+            )
+          }
         </h2>
         <div className="flex">
           <Link href={previousCycle ? `/cycles/${previousCycle.id}` : ''}>
