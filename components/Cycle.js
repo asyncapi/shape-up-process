@@ -18,7 +18,7 @@ export default function Cycle({ visibleCycle, inCycle, previousCycle, nextCycle,
       }
     })
   }).flat().sort((h1, h2) => {
-    return new Date(h2.updatedAt) - new Date(h1.updatedAt)
+    return new Date(h2.progress.updatedAt) - new Date(h1.progress.updatedAt)
   })
 
   const isPastCycle = new Date(visibleCycle.due_on) < new Date()
