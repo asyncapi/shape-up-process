@@ -163,6 +163,12 @@ export default function CyclePage() {
   )
 }
 
+export async function getStaticProps() {
+  return {
+    props: {}
+  }
+}
+
 function belongsToBet(bet, scope) {
   if (!bet) return false
   if (!scope || !scope.parent_epics || scope.parent_epics.length === 0) return false
