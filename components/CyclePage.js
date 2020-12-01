@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
 import Bet from './Bet'
@@ -13,35 +14,41 @@ import Cycle from './Cycle'
 export default function CyclePage() {
   const router = useRouter()
   let visibleCycle, previousCycle, nextCycle, inCycle = false, availablePitches = [], availableBets = [], availableScopes = []
-  if (router.query && router.query.id) {
-    visibleCycle = data.cycles.find(cycle => String(cycle.id) === router.query.id)
-    const startDate = new Date(visibleCycle.start_date)
-    const endDate = new Date(visibleCycle.due_on)
-    const now = new Date()
-    inCycle = (startDate <= now && endDate >= now)
-  } else {
-    visibleCycle = data.cycles.find(cycle => {
-      const startDate = new Date(cycle.start_date)
-      const endDate = new Date(cycle.due_on)
+  
+  function calculate() {
+    if (router.query && router.query.id) {
+      visibleCycle = data.cycles.find(cycle => String(cycle.id) === router.query.id)
+      const startDate = new Date(visibleCycle.start_date)
+      const endDate = new Date(visibleCycle.due_on)
       const now = new Date()
-      if (endDate < now) return false
-      if (startDate <= now && endDate >= now) inCycle = true
-      return cycle
+      inCycle = (startDate <= now && endDate >= now)
+    } else {
+      visibleCycle = data.cycles.find(cycle => {
+        const startDate = new Date(cycle.start_date)
+        const endDate = new Date(cycle.due_on)
+        const now = new Date()
+        if (endDate < now) return false
+        if (startDate <= now && endDate >= now) inCycle = true
+        return cycle
+      })
+    }
+    const visibleCycleIndex = data.cycles.findIndex(cycle => cycle.id === visibleCycle.id)
+    previousCycle = visibleCycleIndex > 0 ? data.cycles[visibleCycleIndex - 1] : null
+    nextCycle = visibleCycleIndex < data.cycles.length - 1 ? data.cycles[visibleCycleIndex + 1] : null
+
+    availablePitches = data.pitches.filter(b => b.milestone && visibleCycle && b.milestone.id === visibleCycle.id)
+    availableBets = data.bets.filter(b => b.milestone && visibleCycle && b.milestone.id === visibleCycle.id)
+
+    availableScopes = data.scopes.map(scope => {
+      const scopeProgress = data.progress.find(p => p.issue_number === scope.number)
+      scope.progress = scopeProgress || null
+      scope.color = nearestColor.from(colors)(stringToColor(`${scope.title} ${scope.issue_number}`))
+      return scope
     })
   }
-  const visibleCycleIndex = data.cycles.findIndex(cycle => cycle.id === visibleCycle.id)
-  previousCycle = visibleCycleIndex > 0 ? data.cycles[visibleCycleIndex - 1] : null
-  nextCycle = visibleCycleIndex < data.cycles.length - 1 ? data.cycles[visibleCycleIndex + 1] : null
 
-  availablePitches = data.pitches.filter(b => b.milestone && visibleCycle && b.milestone.id === visibleCycle.id)
-  availableBets = data.bets.filter(b => b.milestone && visibleCycle && b.milestone.id === visibleCycle.id)
-
-  availableScopes = data.scopes.map(scope => {
-    const scopeProgress = data.progress.find(p => p.issue_number === scope.number)
-    scope.progress = scopeProgress || null
-    scope.color = nearestColor.from(colors)(stringToColor(`${scope.title} ${scope.issue_number}`))
-    return scope
-  })
+  calculate()
+  useEffect(calculate, [])
 
   const queryParams = new URLSearchParams(router.asPath.split('?')[1])
   let visibleBet = availableBets[0] || null
