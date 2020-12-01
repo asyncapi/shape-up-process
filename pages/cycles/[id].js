@@ -1,5 +1,5 @@
 import data from '../../data.json'
-import CyclePage, { getStaticProps as getStaticPropsFunction } from '../../components/CyclePage'
+import CyclePage from '../../components/CyclePage'
 
 export default function Cycle(props) {
   return (
@@ -7,7 +7,11 @@ export default function Cycle(props) {
   )
 }
 
-export const getStaticProps = getStaticPropsFunction
+export async function getStaticProps() {
+  return {
+    props: {}
+  }
+}
 
 export async function getStaticPaths() {
   return {
