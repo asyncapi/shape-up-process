@@ -1,4 +1,4 @@
-import CyclePage, { getStaticProps as getStaticPropsFunction } from '../components/CyclePage'
+import CyclePage, { getServerSideProps as getServerSidePropsFunction } from '../components/CyclePage'
 
 export default function Home(props) {
   return (
@@ -6,4 +6,4 @@ export default function Home(props) {
   )
 }
 
-export const getStaticProps = getStaticPropsFunction
+export const getServerSideProps = getServerSidePropsFunction
