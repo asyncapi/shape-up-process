@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
 import Bet from './Bet'
@@ -10,7 +11,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Cycle from './Cycle'
 
-export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], availableScopes = [] }) {
+export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], availableScopes = [], params }) {
   const router = useRouter()
   const queryParams = new URLSearchParams(router.asPath.split('?')[1])
   let visibleBet = availableBets[0] || null
@@ -23,12 +24,14 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
     selectedScopes = queryParams.get('scopes').split(',').filter(Boolean).map(id => availableScopes.find(scope => scope.issue_number === Number(id)))
   }
 
+  useEffect(() => {
+    if (!params || !params.id) replaceRoute()
+  }, [])
 
   function replaceRoute() {
     const queryString = queryParams.toString().length ? `?${queryParams.toString()}` : ''
     router.replace(`/cycles/${visibleCycle.id}${queryString}`)
   }
-
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
@@ -37,7 +40,6 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
       replaceRoute()
     }
   }
-
 
   function onScopeChange({ issue, toggled }) {
     let scopeIds
@@ -137,7 +139,6 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 export async function getServerSideProps({ params = {} }) {
   const { cycle, inCycle } = getVisibleCycleDetails(params.id)
   if (!cycle) return { notFound: true }
-  if (!params.id) return { redirect: { destination: `/cycles/${cycle.id}`, permanent: false } }
   data.visibleCycle = cycle
   data.inCycle = inCycle
   
@@ -158,6 +159,7 @@ export async function getServerSideProps({ params = {} }) {
   return {
     props: {
       ...data,
+      params,
     },
   }
 }
