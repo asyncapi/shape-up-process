@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import stringToColor from 'string-to-color'
 import nearestColor from 'nearest-color'
 import Bet from './Bet'
@@ -10,48 +10,32 @@ import Header from './Header'
 import Footer from './Footer'
 import Cycle from './Cycle'
 
-export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], availableScopes = [] }) {
-  const router = useRouter()
-  const queryParams = new URLSearchParams(router.asPath.split('?')[1])
-  let visibleBet = availableBets[0] || null
-  if (queryParams.has('bet')) {
-    visibleBet = availableBets.find(bet => bet.issue_number === Number(queryParams.get('bet'))) || visibleBet
-  }
-  let visibleScopes = availableScopes.filter(scope => belongsToBet(visibleBet, scope))
-  let selectedScopes = visibleScopes
-  if (queryParams.has('scopes')) {
-    selectedScopes = queryParams.get('scopes').split(',').filter(Boolean).map(id => availableScopes.find(scope => scope.issue_number === Number(id)))
-  }
+export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCycle, availablePitches = [], availableBets = [], defaultVisibleBet, availableScopes = [], defaultVisibleScopes }) {
+  const [visibleBet, setVisibleBet] = useState(defaultVisibleBet)
+  const [visibleScopes, setVisibleScopes] = useState(defaultVisibleScopes)
+  const [selectedScopes, setSelectedScopes] = useState(defaultVisibleScopes)
 
-  function replaceRoute() {
-    const queryString = queryParams.toString().length ? `?${queryParams.toString()}` : ''
-    router.replace(`/cycles/${visibleCycle.id}${queryString}`)
-  }
+  useEffect(() => {
+    onBetChange({ issue: defaultVisibleBet, toggled: true })
+  }, [defaultVisibleBet])
 
   function onBetChange({ issue, toggled }) {
     if (toggled) {
-      queryParams.set('bet', issue.issue_number)
-      queryParams.delete('scopes')
-      replaceRoute()
+      setVisibleBet(issue)
+      const allScopesFromBet = availableScopes.filter(scope => belongsToBet(issue, scope))
+      setVisibleScopes(allScopesFromBet)
+      setSelectedScopes(allScopesFromBet)
     }
   }
 
   function onScopeChange({ issue, toggled }) {
-    let scopeIds
-    
-    if (queryParams.has('scopes')) {
-      scopeIds = (queryParams.get('scopes') || '').split(',').filter(Boolean)
-    } else {
-      scopeIds = visibleScopes.map(s => String(s.number))
-    }
-
-    if (toggled && !scopeIds.find(id => id === String(issue.number))) {
-      scopeIds.push(issue.number)
-    } else if (!toggled) {
-      scopeIds = scopeIds.filter(id => id !== String(issue.number))
-    }
-    queryParams.set('scopes', scopeIds)
-    replaceRoute()
+    setSelectedScopes(visibleScopes.filter(scope => {
+      if (issue.number === scope.number) {
+        return toggled
+      } else {
+        return !!selectedScopes.find(s => s.number === scope.number)
+      }
+    }))
   }
 
   return (
@@ -150,6 +134,9 @@ export async function getServerSideProps({ params = {} }) {
     scope.color = nearestColor.from(colors)(stringToColor(`${scope.title} ${scope.issue_number}`))
     return scope
   })
+
+  data.defaultVisibleBet = data.availableBets[0] || null
+  data.defaultVisibleScopes = data.availableScopes.filter(scope => belongsToBet(data.defaultVisibleBet, scope))
 
   return {
     props: {
