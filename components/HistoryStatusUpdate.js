@@ -48,7 +48,7 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
           </div>
         </div>
       </div>
-      <ReactMarkdown plugins={[GithubFlavoredMarkdown, RemarkEmoji]} className="mt-4 mb-8 prose prose-indigo">
+      <ReactMarkdown plugins={[GithubFlavoredMarkdown, RemarkEmoji]} className="mt-4 mb-8 prose prose-pink">
         {statusUpdate.progress.statusMarkdown}
       </ReactMarkdown>
     </div>
