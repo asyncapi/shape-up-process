@@ -4,5 +4,6 @@
     X-Frame-Options = "ALLOW-FROM https://www.youtube.com/"
 
 [build]
-  command = "npm run build && npm run export"
-  publish = "out"
+  command = "npm run build"
+  functions = "out_functions"
+  publish   = "out_publish"
