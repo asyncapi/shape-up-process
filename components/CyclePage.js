@@ -136,6 +136,8 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 
 export async function getServerSideProps({ params = {} }) {
   const { cycle, inCycle } = getVisibleCycleDetails(params.id)
+  if (!cycle) return { notFound: true }
+  if (!params.id) return { redirect: { destination: `/cycles/${cycle.id}`, permanent: false } }
   data.visibleCycle = cycle
   data.inCycle = inCycle
   
@@ -166,10 +168,12 @@ function getVisibleCycleDetails(id) {
 
   if (id) {
     cycle = data.cycles.find(cycle => String(cycle.id) === id)
-    const startDate = new Date(cycle.start_date)
-    const endDate = new Date(cycle.due_on)
-    const now = new Date()
-    inCycle = (startDate <= now && endDate >= now)
+    if (cycle) {
+      const startDate = new Date(cycle.start_date)
+      const endDate = new Date(cycle.due_on)
+      const now = new Date()
+      inCycle = (startDate <= now && endDate >= now)
+    }
   } else {
     cycle = data.cycles.find(c => {
       const startDate = new Date(c.start_date)

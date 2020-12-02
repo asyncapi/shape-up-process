@@ -1,27 +1,11 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
   plugins: [
-    require('@tailwindcss/ui'),
+    require('@tailwindcss/typography'),
   ],
   theme: {
-    typography: theme => ({
-      default: {
-        css: {
-          a: {
-            color: theme('colors.pink.500'),
-            fontWeight: theme('fontWeight.semibold'),
-            textDecoration: 'none',
-            '&:hover': {
-              color: theme('colors.pink.700'),
-            },
-          }
-        }
-      }
-    }),
     stroke: theme => ({
       'white': theme('colors.white'),
       'gray-200': theme('colors.gray.200')
@@ -31,6 +15,9 @@ module.exports = {
       'gray-500': theme('colors.gray.500')
     }),
     extend: {
+      colors: {
+        cyan: colors.cyan,
+      },
       height: {
         100: '25rem'
       }

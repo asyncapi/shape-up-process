@@ -13,7 +13,7 @@ export default function CycleHeader({ visibleCycle, inCycle, previousCycle, next
           {
             inCycle && (
               <>
-                <span className="inline-block transform -translate-y-1.5 ml-2 px-2 py-1 text-teal-800 uppercase text-xs leading-4 font-medium border border-teal-100 rounded-full">
+                <span className="inline-block transform -translate-y-1.5 ml-2 px-2 py-1 text-cyan-800 uppercase text-xs leading-4 font-medium border border-cyan-100 rounded-full">
                   <span className="inline-block mr-1 animate-pulse bg-red-500 rounded-full w-2 h-2"></span>
                   Current cycle
                 </span>

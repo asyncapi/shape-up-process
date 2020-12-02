@@ -27,6 +27,8 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
     return 'text-green-500'
   }
 
+  const mark = '```\nconst a = 0;\n````\n'
+
   return (
     <div className={`${className}`}>
       <div className="flex">
@@ -46,7 +48,7 @@ export default function HistoryStatusUpdate ({ statusUpdate, className = '' }) {
           </div>
         </div>
       </div>
-      <ReactMarkdown plugins={[GithubFlavoredMarkdown, RemarkEmoji]} className="mt-4 mb-8 markdown-body">
+      <ReactMarkdown plugins={[GithubFlavoredMarkdown, RemarkEmoji]} className="mt-4 mb-8 prose prose-indigo">
         {statusUpdate.progress.statusMarkdown}
       </ReactMarkdown>
     </div>
