@@ -132,28 +132,14 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
   )
 }
 
-export async function getStaticProps({ params }) {
-  let inCycle = false
-  if (params && params.id) {
-    data.visibleCycle = data.cycles.find(cycle => String(cycle.id) === params.id)
-    const startDate = new Date(data.visibleCycle.start_date)
-    const endDate = new Date(data.visibleCycle.due_on)
-    const now = new Date()
-    inCycle = (startDate <= now && endDate >= now)
-  } else {
-    data.visibleCycle = data.cycles.find(cycle => {
-      const startDate = new Date(cycle.start_date)
-      const endDate = new Date(cycle.due_on)
-      const now = new Date()
-      if (endDate < now) return false
-      if (startDate <= now && endDate >= now) inCycle = true
-      return cycle
-    })
-  }
+export async function getServerSideProps({ params = {} }) {
+  const { cycle, inCycle } = getVisibleCycleDetails(params.id)
+  data.visibleCycle = cycle
+  data.inCycle = inCycle
+  
   const visibleCycleIndex = data.cycles.findIndex(cycle => cycle.id === data.visibleCycle.id)
   data.previousCycle = visibleCycleIndex > 0 ? data.cycles[visibleCycleIndex - 1] : null
   data.nextCycle = visibleCycleIndex < data.cycles.length - 1 ? data.cycles[visibleCycleIndex + 1] : null
-  data.inCycle = inCycle
 
   data.availablePitches = data.pitches.filter(b => b.milestone && data.visibleCycle && b.milestone.id === data.visibleCycle.id)
   data.availableBets = data.bets.filter(b => b.milestone && data.visibleCycle && b.milestone.id === data.visibleCycle.id)
@@ -169,6 +155,33 @@ export async function getStaticProps({ params }) {
     props: {
       ...data,
     },
+  }
+}
+
+function getVisibleCycleDetails(id) {
+  let inCycle = false
+  let cycle
+
+  if (id) {
+    cycle = data.cycles.find(cycle => String(cycle.id) === id)
+    const startDate = new Date(cycle.start_date)
+    const endDate = new Date(cycle.due_on)
+    const now = new Date()
+    inCycle = (startDate <= now && endDate >= now)
+  } else {
+    cycle = data.cycles.find(c => {
+      const startDate = new Date(c.start_date)
+      const endDate = new Date(c.due_on)
+      const now = new Date()
+      if (endDate < now) return false
+      if (startDate <= now && endDate >= now) inCycle = true
+      return c
+    })
+  }
+
+  return {
+    cycle,
+    inCycle,
   }
 }
 
