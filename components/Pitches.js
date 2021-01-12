@@ -22,7 +22,7 @@ export default function Pitches({ pitches = [] }) {
                 <dl className="mt-1 flex-grow flex flex-col justify-between">
                   <dt className="sr-only">Appetite</dt>
                   <dd className="mt-3">
-                    <span className="px-2 py-1 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">{appetite(pitch)}</span>
+                    <span className="px-2 py-1 text-teal-800 text-xs leading-4 font-medium bg-cyan-200 rounded-full">{appetite(pitch)}</span>
                   </dd>
                   <dt className="sr-only">Author avatar</dt>
                   <dd className="text-gray-700 text-sm leading-5 mt-6 mb-1">
