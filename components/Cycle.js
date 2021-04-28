@@ -45,7 +45,11 @@ export default function Cycle({ visibleCycle, inCycle, previousCycle, nextCycle,
                       isPastCycle ? (
                         <span>
                           This cycle has already finished.
-                          <Link href="/"><a className="inline-flex mx-1.5 text-sm text-gray-900 font-medium hover:text-gray-600 transition ease-in-out duration-150">Go to the current cycle.</a></Link>
+                          {nextCycle ? (
+                            <Link href="/"><a className="inline-flex mx-1.5 text-sm text-gray-900 font-medium hover:text-gray-600 transition ease-in-out duration-150">Go to the current cycle.</a></Link>
+                          ) : (
+                            <a className="inline-flex mx-1.5 text-sm text-gray-900 font-medium">We're currently evaluating what's next. Please come back soon.</a>
+                          )}
                         </span>
                       ) : (
                         shouldShowPitches() ? (

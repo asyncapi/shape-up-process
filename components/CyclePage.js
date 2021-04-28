@@ -139,6 +139,7 @@ export default function CyclePage({ visibleCycle, previousCycle, nextCycle, inCy
 export async function getServerSideProps({ params = {} }) {
   const { cycle, inCycle } = getVisibleCycleDetails(params.id)
   if (!cycle) return { notFound: true }
+
   data.visibleCycle = cycle
   data.inCycle = inCycle
   
@@ -185,6 +186,13 @@ function getVisibleCycleDetails(id) {
       if (startDate <= now && endDate >= now) inCycle = true
       return c
     })
+
+    if (!cycle && data.cycles.length > 0) {
+      // If there is no active cycle, pick up the last finished one.
+      cycle = [...data.cycles].sort(function(a,b){
+        return new Date(b.due_on) - new Date(a.due_on);
+      })[0];
+    }
   }
 
   return {
