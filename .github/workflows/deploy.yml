@@ -14,11 +14,11 @@ jobs:
     steps:
     - name: Trigger asyncapi-shape-up site deploy on Netlify
       run: |
-        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-shape-up/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i --fail-with-body
+        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-shape-up/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i -f
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
     - name: Trigger asyncapi-website site deploy on Netlify (Roadmap update)
       run: |
-        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-website/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i --fail-with-body
+        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-website/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i -f
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
