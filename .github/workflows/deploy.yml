@@ -12,15 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Trigger shape-up site deploy on Netlify
+    - name: Trigger asyncapi-shape-up site deploy on Netlify
       run: |
-        curl -X POST "https://api.netlify.com/api/v1/sites/$NETLIFY_SHAPEUP_SITE_ID/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN"
+        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-shape-up/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i -f
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SHAPEUP_SITE_ID }}
-    - name: Trigger AsyncAPI site deploy on Netlify (Roadmap update)
+    - name: Trigger asyncapi-website site deploy on Netlify (Roadmap update)
       run: |
-        curl -X POST "https://api.netlify.com/api/v1/sites/$NETLIFY_ASYNCAPI_SITE_ID/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN"
+        curl -X POST "https://api.netlify.com/api/v1/sites/asyncapi-website/builds" -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -i -f
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_ASYNCAPI_SITE_ID }}
