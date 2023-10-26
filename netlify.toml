@@ -1,9 +1,0 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "ALLOW-FROM https://www.youtube.com/"
-
-[build]
-  command = "npm run build"
-  functions = "out_functions"
-  publish   = "out_publish"
